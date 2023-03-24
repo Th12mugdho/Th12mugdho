@@ -1,0 +1,185 @@
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
+#include <Servo.h>
+#include <stdio.h>
+
+int bluetoothData; // variable to store the data from the Bluetooth module
+int angle00, angle01, angle02, angle03, angle04, angle05, angle06, angle07, angle08, angle09, angle10, angle11;
+
+Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+
+#define SERVOMIN  125 // this is the 'minimum' pulse length count (out of 4096)
+#define SERVOMAX  575 // this is the 'maximum' pulse length count (out of 4096)
+
+// our servo # counter
+uint8_t servonum = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("16 channel Servo test!");
+  pwm.begin();
+  pwm.setPWMFreq(60);  // Analog servos run at ~60 Hz updates
+}
+void loop() {
+  if (Serial.available()) { // Checks whether data is available or not
+    bluetoothData = Serial.read(); // Reads the data from the serial port
+
+    if (bluetoothData == '1') { // If value is 0
+          void loop(); {
+          for( int angle00=0; angle00<=80; angle00+=10)
+         {
+        
+            if (angle00>=0&&angle00<=60)
+            angle01=angle00+20;
+            else if (angle00>=61&&angle00<=80)
+            angle01=angle00-70;
+            if (angle00>=0&&angle00<=40)
+            angle02=angle00+40;
+            else if (angle00>=41&&angle00<=80)
+            angle02=angle00-50;
+            if (angle00>=0&&angle00<=20)
+            angle03=angle00+60;
+            else if (angle00>=21&&angle00<=80)
+            angle03=angle00-30;
+            
+          delay(1);
+          pwm.setPWM(0, 0, angleToPulse(angle00) ); 
+          pwm.setPWM(1, 0, angleToPulse(angle00) ); 
+          pwm.setPWM(2, 0, angleToPulse(angle01) ); 
+          pwm.setPWM(3, 0, angleToPulse(angle01) ); 
+          pwm.setPWM(4, 0, angleToPulse(angle02) ); 
+          pwm.setPWM(5, 0, angleToPulse(angle02) ); 
+          pwm.setPWM(6, 0, angleToPulse(angle03) ); 
+          pwm.setPWM(7, 0, angleToPulse(angle03) );     
+         }
+         }
+         
+    } else if (bluetoothData == '2') { // If value is 1
+          void loop(); {
+          for( int angle00=80; angle00>=0; angle00-=10)
+         {
+        
+            if (angle00>=0&&angle00<=60)
+            angle01=angle00+20;
+            else if (angle00>=61&&angle00<=80)
+            angle01=angle00-70;
+            if (angle00>=0&&angle00<=40)
+            angle02=angle00+40;
+            else if (angle00>=41&&angle00<=80)
+            angle02=angle00-50;
+            if (angle00>=0&&angle00<=20)
+            angle03=angle00+60;
+            else if (angle00>=21&&angle00<=80)
+            angle03=angle00-30;
+            
+          delay(1);
+          pwm.setPWM(0, 0, angleToPulse(angle00) ); 
+          pwm.setPWM(4, 0, angleToPulse(angle00) ); 
+          pwm.setPWM(1, 0, angleToPulse(angle01) ); 
+          pwm.setPWM(5, 0, angleToPulse(angle01) ); 
+          pwm.setPWM(2, 0, angleToPulse(angle02) ); 
+          pwm.setPWM(6, 0, angleToPulse(angle02) ); 
+          pwm.setPWM(3, 0, angleToPulse(angle03) ); 
+          pwm.setPWM(7, 0, angleToPulse(angle03) );     
+         }
+         }
+         
+    } else if (bluetoothData == '3') { // If value is 2
+          void loop(); {
+          for( int angle08=0; angle08<=80; angle08+=10)
+         {
+        
+            if (angle08>=0&&angle08<=60){
+            angle09=angle08+20;}
+            else if (angle08>=61&&angle08<=80){
+            angle09=angle08-70;}
+            if (angle08>=0&&angle08<=40){
+            angle10=angle08+40;}
+            else if (angle08>=41&&angle08<=80){
+            angle10=angle08-50;}
+            if (angle08>=0&&angle08<=20){
+            angle11=angle08+60;}
+            else if (angle08>=21&&angle08<=80){
+            angle11=angle08-30;}
+
+            if(angle08==0)
+            pwm.setPWM(0, 0, angleToPulse(80) );  
+            else if(angle08==20)
+            pwm.setPWM(1, 0, angleToPulse(80) );  
+            else if(angle08==40)
+            pwm.setPWM(2, 0, angleToPulse(80) );  
+            else if(angle08==60)
+            pwm.setPWM(3, 0, angleToPulse(80) );  
+            else{
+            pwm.setPWM(0, 0, angleToPulse(angle00) );  
+            pwm.setPWM(1, 0, angleToPulse(angle01) );  
+            pwm.setPWM(2, 0, angleToPulse(angle02) );  
+            pwm.setPWM(3, 0, angleToPulse(angle03) );  
+            }
+
+            
+          delay(1);
+          pwm.setPWM(8, 0, angleToPulse(angle08) ); 
+          pwm.setPWM(9, 0, angleToPulse(angle09) ); 
+          pwm.setPWM(10, 0, angleToPulse(angle10) ); 
+          pwm.setPWM(11, 0, angleToPulse(angle11) ); 
+               
+         }
+         }
+         
+    } else if (bluetoothData == '4') { // If value is 3
+      void loop(); {
+          for( int angle08=80; angle08>=0; angle08-=10)
+         {
+        
+            if (angle08>=0&&angle08<=60){
+            angle09=angle08+20;}
+            else if (angle08>=61&&angle08<=80){
+            angle09=angle08-70;}
+            if (angle08>=0&&angle08<=40){
+            angle10=angle08+40;}
+            else if (angle08>=41&&angle08<=80){
+            angle10=angle08-50;}
+            if (angle08>=0&&angle08<=20){
+            angle11=angle08+60;}
+            else if (angle08>=21&&angle08<=80){
+            angle11=angle08-30;}
+
+            if(angle08==0)
+            pwm.setPWM(0, 0, angleToPulse(80) );  
+            else if(angle08==20)
+            pwm.setPWM(1, 0, angleToPulse(80) );  
+            else if(angle08==40)
+            pwm.setPWM(2, 0, angleToPulse(80) );  
+            else if(angle08==60)
+            pwm.setPWM(3, 0, angleToPulse(80) );  
+            else{
+            pwm.setPWM(0, 0, angleToPulse(angle00) );  
+            pwm.setPWM(1, 0, angleToPulse(angle01) );  
+            pwm.setPWM(2, 0, angleToPulse(angle02) );  
+            pwm.setPWM(3, 0, angleToPulse(angle03) );  
+            }
+
+            
+          delay(1);
+          pwm.setPWM(8, 0, angleToPulse(angle08) ); 
+          pwm.setPWM(9, 0, angleToPulse(angle09) ); 
+          pwm.setPWM(10, 0, angleToPulse(angle10) ); 
+          pwm.setPWM(11, 0, angleToPulse(angle11) ); 
+               
+         }
+         }
+         
+    } else if (bluetoothData == '0') { // If value is 4
+     // sweep(servo4);
+    }
+  }
+}
+
+
+int angleToPulse(int ang){
+   int pulse = map(ang,0, 180, SERVOMIN,SERVOMAX);// map angle of 0 to 180 to Servo min and Servo max 
+   Serial.print("Angle: ");Serial.print(ang);
+   Serial.print(" pulse: ");Serial.println(pulse);
+   return pulse;
+}
